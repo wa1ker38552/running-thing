@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Runner Search</title>
+        <link rel="stylesheet" href="https://lib.cadenchau.com/lib.css">
+        <link rel="stylesheet" href="/static/globals.css">
+        <link rel="stylesheet" href="/static/style.css">
+        <script src="https://lib.cadenchau.com/lib.js"></script>
+        <script src="/static/script.js"></script>
+        <script>
+            const query = "{{query}}"
+
+            window.onload = function() {
+                setupSearch("runner")
+
+                const container = dquery(".content")
+                request("/api/search/runner?q="+query)
+                    .then(data => {
+                        data.forEach(function(item) {
+                            container.append(renderRunner(item))
+                        })
+
+                        if (data.length == 0) {
+                            container.innerHTML = "<i>No runners found!</i>"
+                        }
+                    })
+            }
+        </script>
+    </head>
+    <body class="centered-children">
+        <div class="wrapper">
+            <div class="navigation">
+                <div class="centered-vertically">
+                    <h1><a href="/">Meet Tracker</a></h1>
+                </div>
+                <div></div>
+                <div class="centered-vertically" style="gap: 1rem">
+                    <a class="navigation-item" href="/search/runner">Find Runner</a>
+                    <a class="navigation-item" href="/search/meet">Find Meet</a>
+                </div>
+            </div>
+            <div class="break"></div>
+            <div style="position: relative">
+                {% if query %}
+                    <input id="runner-search" type=text autocomplete="off" spellcheck="false" value="{{query}}">
+                {% else %}
+                    <input id="runner-search" type=text autocomplete="off" spellcheck="false">
+                {% endif %}
+                <button class="runner-search-button" onclick="searchRunner()">Search</button>
+                <h4>Search for a runner</h4>
+            </div>
+            <div class="break"></div>
+            <div class="content">
+                
+            </div>
+        </div>
+    </body>
+</html>

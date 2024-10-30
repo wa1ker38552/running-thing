@@ -1,0 +1,138 @@
+body {
+    background: var(--background);
+}
+
+.wrapper {
+    width: 70vw;
+    height: 100vh;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+#runner-search {
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    border: solid 1px var(--secondary);
+    border-radius: 5rem;
+    width: 100%;
+}
+
+#runner-search:focus {
+    border-color: black;
+}
+
+.runner-search-button {
+    padding: 0.5rem 1rem;
+    background: var(--accent);
+    position: absolute;
+    right: 0;
+    border: solid 1px transparent;
+    border-radius: 0 5rem 5rem 0;
+    font-size: 1rem;
+    color: var(--background);
+}
+
+.content {
+    height: calc(100vh - 10rem);
+    box-sizing: border-box;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.runner-result {
+    display: block;
+    border: solid 1px var(--secondary);
+    border-radius: 5px;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    margin-bottom: 0.5rem;
+    color: black;
+    text-decoration: none;
+}
+
+.runner-result:hover {
+    border-color: black;
+}
+
+.runner-result:last-child {
+    margin-bottom: 0;
+}
+
+.runner-result .centered-vertically {
+    gap: 0.5rem;
+}
+
+.tag {
+    color: white;
+    background: var(--accent);
+    border-radius: 5rem;
+    padding: 0 0.5rem;
+}
+
+.junior-varsity {
+    background: red;
+}
+
+.navigation {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-gap: 1rem;
+}
+
+.navigation-item {
+    font-size: 1.2rem;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.navigation-item:hover {
+    text-decoration: underline;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.data-field {
+    color: var(--secondary);
+}
+
+.meet {
+    border: solid 1px var(--secondary);
+    border-radius: 5px;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.meet:last-child {
+    margin-bottom: 0;
+}
+
+.top-runner {
+    display: block;
+    border: solid 1px var(--secondary);
+    border-width: 1px 1px 1px 5px;
+    border-radius: 5px;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    margin-bottom: 0.5rem;
+}
+
+.top-runner:last-child {
+    margin-bottom: 0;
+}
+
+.top-runner:first-child {
+    border-color: gold;
+}
+
+.top-runner:nth-child(2) {
+    border-color: silver;
+}
+
+.top-runner:nth-child(3) {
+    border-color: brown;
+}

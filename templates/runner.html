@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="https://lib.cadenchau.com/lib.css">
+        <link rel="stylesheet" href="/static/globals.css">
+        <link rel="stylesheet" href="/static/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="https://lib.cadenchau.com/lib.js"></script>
+        <script src="/static/script.js"></script>
+        <script>
+            const rid = "{{runner_id}}"
+
+            window.onload = function() {
+                request("/api/runner?id="+rid)
+                    .then(data => {
+                        dquery("#name").textContent = data.name
+                        dquery("#school").textContent = data.team
+                        dquery("#age").textContent = data.age
+                        dquery("#division").textContent = data.division
+
+                        // render chart
+                        const options = {
+                            series: [{
+                                name: "Value",
+                                data: data.time_distributions
+                            }],
+                            chart: {
+                                type: 'line',
+                                height: 350
+                            },
+                            xaxis: {
+                                type: 'datetime'
+                            },
+                            yaxis: {
+                                labels: {
+                                    formatter: (value) => `${Math.round(value / 60)} min` // Converts seconds to minutes
+                                }
+                            }
+                        };
+
+                        const chart = new ApexCharts(dquery("#chart"), options);
+                        chart.render()
+                    })
+            }
+        </script>
+    </head>
+    <body class="centered-children">
+        <div class="wrapper">
+            <div class="navigation">
+                <div class="centered-vertically">
+                    <h1><a href="/">Meet Tracker</a></h1>
+                </div>
+                <div></div>
+                <div class="centered-vertically" style="gap: 1rem">
+                    <a class="navigation-item" href="/search/runner">Find Runner</a>
+                    <a class="navigation-item" href="/search/meet">Find Meet</a>
+                </div>
+            </div>
+            <div class="break"></div>
+            <div class="content">
+                <h1 style="font-size: 2.5rem" id="name">caden chau</h1>
+                <h2>School: <span class="data-field" id="school">los altos high school</span></h2>
+                <h2>Age: <span class="data-field" id="age">16</span></h2>
+                <h2>Division: <span class="data-field" id="division">junior varisty</span></h2>
+                <div class="break"></div>
+                <h1>Time Distribution</h1>
+                <div class="gap"></div>
+                <div id="chart"></div>
+            </div>
+        </div>
+    </body>
+</html>

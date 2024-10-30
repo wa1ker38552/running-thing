@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="https://lib.cadenchau.com/lib.css">
+        <link rel="stylesheet" href="/static/globals.css">
+        <link rel="stylesheet" href="/static/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="https://lib.cadenchau.com/lib.js"></script>
+        <script src="/static/script.js"></script>
+        <script>
+            const mid = "{{meet_id}}"
+
+            window.onload = function() {
+                request("/api/meet?id="+mid)
+                    .then(data => {
+                        console.log(data)
+                        dquery("#name").textContent = data.name
+                        dquery("#schools").textContent = `${data.schools[0]} vs ${data.schools[1]}`
+                        dquery("#date").textContent = formatDate(new Date(data.time))
+
+                        const container = dquery(".top-runners")
+                        let i = 0
+                        data.participants.forEach(function(item) {
+                            container.append(renderTopRunner(i, item))
+                            i ++
+                        })
+                    })
+            }
+        </script>
+    </head>
+    <body class="centered-children">
+        <div class="wrapper">
+            <div class="navigation">
+                <div class="centered-vertically">
+                    <h1><a href="/">Meet Tracker</a></h1>
+                </div>
+                <div></div>
+                <div class="centered-vertically" style="gap: 1rem">
+                    <a class="navigation-item" href="/search/runner">Find Runner</a>
+                    <a class="navigation-item" href="/search/meet">Find Meet</a>
+                </div>
+            </div>
+            <div class="break"></div>
+            <div class="content">
+                <h1 style="font-size: 2.5rem" id="name">caden chau</h1>
+                <h2>Schools: <span class="data-field" id="schools">los altos high school</span></h2>
+                <h2>Date: <span class="data-field" id="date">junior varisty</span></h2>
+                <div class="break"></div>
+                <h1>Top Runners</h1>
+                <div class="gap"></div>
+                <div class="top-runners"></div>
+            </div>
+        </div>
+    </body>
+</html>
